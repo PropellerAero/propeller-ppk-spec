@@ -63,7 +63,6 @@ for mission_index, mission_dir in enumerate(mission_dirs):
         '-EXIF:ImageHeight',
         '-EXIF:Model',
         '-EXIF:LensModel',
-        '-EXIF:SerialNumber',
         '-EXIF:GPSLongitudeRef',
         '-EXIF:GPSLongitude',
         '-EXIF:GPSLatitudeRef',
