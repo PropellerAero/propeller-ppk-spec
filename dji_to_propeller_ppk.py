@@ -4,11 +4,14 @@ import argparse
 import os
 import shutil
 import subprocess
+import csv
+import json
 
 from pathlib import Path
+from subprocess import check_output
 
 # Script to convert DJI PPK flight data to Propeller PPK spec
-# Requires ExifTool (https://exiftool.org/)
+# Requires ExifTool and convbin on the PATH
 
 parser = argparse.ArgumentParser(
     description='Script to convert DJI PPK flight data to Propeller PPK spec'
@@ -20,15 +23,12 @@ args = vars(parser.parse_args())
 mission_list = os.listdir(args['source_dir'])
 mission_list.sort()
 
-# mission_dirs = [dir for dir in mission_list if not dir.startswith('.') and os.path.isdir(os.path.join(args['source_dir'], dir))]
-mission_dirs = [dir for dir in mission_list if not dir.startswith('.') and os.path.isdir(os.path.join(args['source_dir'], dir))][:1]
+mission_dirs = [dir for dir in mission_list if not dir.startswith('.') and os.path.isdir(os.path.join(args['source_dir'], dir))]
 
-mission_index = 1
-
-for mission_dir in mission_dirs:
+for mission_index, mission_dir in enumerate(mission_dirs):
     abs_in_path = os.path.join(args['source_dir'], mission_dir)
 
-    mission_prefix = f'Flight{mission_index:02}'
+    mission_prefix = f'Flight{mission_index+1:02}'
 
     abs_out_path = os.path.join(args['dest_dir'], mission_prefix)
     print(f'Converting mission {mission_dir}')
@@ -75,6 +75,67 @@ for mission_dir in mission_dirs:
         '-overwrite_original',
         abs_out_path
     ], stdout=subprocess.DEVNULL)
+
+    # Convert Timestamp.MRK to metadata.csv
+    timestamp_files = [f for f in os.listdir(abs_in_path) if f.endswith('TIMESTAMP.MRK')]
+
+    if len(timestamp_files) != 1:
+        raise Exception(f'1 TIMESTAMP.MRK file expected, found {len(timestamp_files)} in {mission_dir}')
+
+
+    exif_data = json.loads(check_output(['exiftool', '-json', abs_in_path]))
+    exif_data.sort(key=lambda x: x['FileName'])
+
+    src_timestamp_path = os.path.join(abs_in_path, timestamp_files[0])
+    dst_timestamp_path = os.path.join(abs_out_path, f'{mission_prefix}_metadata.csv')
+
+    with open(dst_timestamp_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+
+        writer.writerow(['Manufacturer', 'Propeller'])
+        writer.writerow(['Model', 'DemoUAV'])
+        writer.writerow(['Serial number', 'AJ34NF12'])
+        writer.writerow(['Firmware version', '1.75.24a_rev2'])
+        writer.writerow(['Propeller PPK version', '1.0'])
+
+        # Header
+        writer.writerow(['Image', 'Timestamp (s)', 'GPS week number', 'Antenna offset north (m)', 'Antenna offset east (m)', 'Antenna offset up (m)', 'Roll (degrees)', 'Pitch (degrees)', 'Yaw (degrees)', 'Approximate Longitude (degrees)', 'Approximate Latitude (degrees)', 'Approximate altitude (m)'])
+
+        with open(src_timestamp_path) as mrk_file:
+            for line in mrk_file:
+                [index, time, week, north, east, up, lat, lon, height,_,_,_,_] = line.split()
+
+                index = int(index)
+                image = f'{mission_prefix}_{index:04}.JPG'
+                time = f'{float(time):.6f}'
+                week = int(week[1:-1])
+                north = int(north.split(',')[0]) / 1000
+                north = f'{north:.3f}'
+                east = int(east.split(',')[0]) / 1000
+                east = f'{east:.3f}'
+                up = int(up.split(',')[0]) / 1000
+                up = f'{up:.3f}'
+                lat = float(lat.split(',')[0])
+                lat = f'{lat:.8f}'
+                lon = float(lon.split(',')[0])
+                lon = f'{lon:.8f}'
+                height = float(height.split(',')[0])
+                height = f'{height:.3f}'
+
+                roll = float(exif_data[index-1]['CameraRoll'])
+                roll = f'{roll:.2f}'
+
+                pitch = float(exif_data[index-1]['CameraPitch'])
+                pitch = f'{pitch:.2f}'
+
+                yaw = float(exif_data[index-1]['CameraYaw'])
+                yaw = f'{yaw:.2f}'
+
+                writer.writerow([image, time, week, north, east, up, roll, pitch, yaw, lon, lat, height])
+
+
+
+
 
     # Convert PPKRAW.bin to GNSS.obs
     print(f'\tConverting GNSS observation file')
@@ -133,5 +194,3 @@ for mission_dir in mission_dirs:
                     file_out.write(line)
 
     Path(unfiltered_gnss_path).unlink()
-
-
