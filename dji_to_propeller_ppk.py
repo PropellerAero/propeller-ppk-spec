@@ -76,8 +76,6 @@ for mission_dir in mission_dirs:
         abs_out_path
     ], stdout=subprocess.DEVNULL)
 
-
-
     # Convert PPKRAW.bin to GNSS.obs
     print(f'\tConverting GNSS observation file')
 
@@ -87,6 +85,7 @@ for mission_dir in mission_dirs:
         raise Exception(f'1 PPKRAW.bin file expected, found {len(gnss_files)} in {mission_dir}')
 
     src_gnss_path = os.path.join(abs_in_path, gnss_files[0])
+    unfiltered_gnss_path = os.path.join(abs_out_path, f'{mission_prefix}_GNSS.obs.0')
     dst_gnss_path = os.path.join(abs_out_path, f'{mission_prefix}_GNSS.obs')
 
     subprocess.run([
@@ -100,6 +99,39 @@ for mission_dir in mission_dirs:
         '-os',
         src_gnss_path,
         '-o',
-        dst_gnss_path
+        unfiltered_gnss_path
 
     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    # Filter RINEX header
+    ALLOWED_RINEX_HEADERS = [
+        'RINEX VERSION / TYPE',
+        'APPROX POSITION XYZ',
+        'SYS / # / OBS TYPES',
+        'TIME OF FIRST OBS',
+        'SYS / PHASE SHIFT',
+        'GLONASS SLOT / FRQ #',
+        'GLONASS COD/PHS/BIS',
+        'END OF HEADER',
+    ]
+
+    with open(unfiltered_gnss_path) as file_in:
+        with open(dst_gnss_path, 'w') as file_out:
+            in_header = True
+            for line in file_in:
+
+                if in_header:
+                    label = line[60:81].strip()
+
+                    if label in ALLOWED_RINEX_HEADERS:
+                        file_out.write(line)
+
+                    if 'END OF HEADER' in label:
+                        in_header = False
+
+                else:
+                    file_out.write(line)
+
+    Path(unfiltered_gnss_path).unlink()
+
+
