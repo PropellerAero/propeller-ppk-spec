@@ -58,6 +58,7 @@ for mission_index, mission_dir in enumerate(mission_dirs):
 
         # Whitelist of tags to keep
         '-EXIF:DateTimeOriginal',
+        '-EXIF:ISO',
         '-EXIF:ShutterSpeedValue',
         '-EXIF:ImageWidth',
         '-EXIF:ImageHeight',
@@ -69,8 +70,6 @@ for mission_index, mission_dir in enumerate(mission_dirs):
         '-EXIF:GPSLatitude',
         '-EXIF:GPSAltitudeRef',
         '-EXIF:GPSAltitude',
-        '-XMP:FlightXSpeed',
-        '-XMP:FlightYSpeed',
         '-overwrite_original',
         abs_out_path
     ], stdout=subprocess.DEVNULL)
@@ -98,7 +97,7 @@ for mission_index, mission_dir in enumerate(mission_dirs):
         writer.writerow(['Propeller PPK version', '1.0'])
 
         # Header
-        writer.writerow(['Image', 'Timestamp (s)', 'GPS week number', 'Antenna offset north (m)', 'Antenna offset east (m)', 'Antenna offset up (m)', 'Roll (degrees)', 'Pitch (degrees)', 'Yaw (degrees)', 'Approximate Longitude (degrees)', 'Approximate Latitude (degrees)', 'Approximate altitude (m)'])
+        writer.writerow(['Image', 'Timestamp (s)', 'GPS week number', 'Antenna offset north (m)', 'Antenna offset east (m)', 'Antenna offset up (m)', 'Roll (degrees)', 'Pitch (degrees)', 'Yaw (degrees)', 'Approximate longitude (degrees)', 'Approximate latitude (degrees)', 'Approximate altitude (m)'])
 
         with open(src_timestamp_path) as mrk_file:
             for line in mrk_file:
