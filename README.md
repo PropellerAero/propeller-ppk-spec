@@ -2,9 +2,7 @@
 
 _Works with Propeller PPK_ is a vendor-agnostic format that aircraft vendors can implement for out of the box compatibility with Propeller PPK.
 
-<!-- TODO - link -->
-
-An example data set is available here.
+An example data set is available [here](https://drive.google.com/drive/folders/1oYa4CrTnOa-PHhblCbttts_LLamHgDf-?usp=sharing).
 
 ## File structure
 
