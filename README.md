@@ -55,9 +55,7 @@ Flights/
 
 ## Images
 
-Images should captured at the native sensor resolution and aspect ratio without any cropping and saved in JPEG format.
-
-Images must be at least 12-megapixels
+Images should captured at the native sensor resolution and aspect ratio without any cropping and saved in JPEG format. Images must be at least 12-megapixels.
 
 Images must be named with the flight prefix and a unique (within the flight) 4 digit incrementing number and end in the `.JPG` extension, e.g. `Flight01_0123.JPG`.
 
@@ -119,7 +117,7 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 
 GNSS observation data for each flight must be stored in RINEX version 3.04 format. The GNSS observations should cover the period from aircraft take off to landing with no gaps between epochs at a constant sample rate of 1 - 20 Hz. GPS, GLONASS and Galileo constellation signals on the L1 & L2 bands are required. Other signals can be included and may be used in future and will be ignored otherwise.
 
-<!-- TODO - observation quality -->
+To ensure accurate GNSS solutions, every epoch must contain at least 16 GPS, GLONASS and Galileo satellites with L1 and L2 measurements both with a signal-to-noise ratio (SNR) of > 35. An initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements is acceptable.
 
 ### RINEX headers
 
@@ -161,7 +159,7 @@ Propeller PPK will validate that each RINEX file uploaded meets the following re
 | Last epoch timestamp          | Must be after timestamp of last image in metadata.json file                 |
 | Sample rate                   | Must be 1 - 20 Hz, (0.05s - 1s interval)                                    |
 | All epochs                    | Must be no gaps > 1 second between samples                                  |
-| Each epoch                    | Must contain at least 20 satellites with SNR > 35 dBHz on both bands        |
+| Each epoch                    | Must contain at least 16 satellites with SNR > 35 dBHz on both bands        |
 | Each epoch                    | Must contain doppler frequency measurement for each satellite               |
 | Each epoch                    | Must contain signal-to-noise (SNR) measurement for each satellite           |
 
