@@ -114,9 +114,22 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 
 ## GNSS observations
 
-GNSS observation data for each flight must be stored in RINEX version 3.04 format. The GNSS observations should cover the period from aircraft take off to landing with no gaps between epochs at a constant sample rate of 1 - 20 Hz. GPS, GLONASS and Galileo constellation signals on the L1 & L2 bands are required. Other signals can be included and may be used in future and will be ignored otherwise.
+GNSS observation data for each flight must be stored in RINEX version 3.04 format. The GNSS observations must:
 
-To ensure accurate GNSS solutions, every epoch must contain at least 16 GPS, GLONASS and Galileo satellites with L1 and L2 measurements both with a signal-to-noise ratio (SNR) of > 35. An initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements is acceptable.
+- Cover the period from aircraft take off to landing
+- Have no gaps between epochs of > 1 second
+- Have a constant sample rate of 1 - 20 Hz
+- Include signals for:
+  - GPS L1
+  - GPS L2
+  - GLONASS L1
+  - GLONASS L2
+  - Galileo E1
+  - Galileo E5
+
+Other signals can be included and may be used in future and will be ignored otherwise.
+
+To ensure accurate GNSS solutions, every epoch must contain at least 16 GPS, GLONASS and Galileo satellites with dual-band measurements both with a signal-to-noise ratio (SNR) of > 35. An initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements is acceptable.
 
 ### RINEX headers
 
