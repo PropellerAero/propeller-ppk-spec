@@ -90,6 +90,7 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 | `DateTimeOriginal` EXIF field           | Must be an ASCII date string of format `YYYY:MM:DD HH:MM:SS`                          |
 | `ISO` EXIF field                        | Must be present                                                                       |
 | `ISO` EXIF field                        | Must be EXIF unsigned int format                                                      |
+| `ISO` EXIF field                        | Must be < `1600` (recommended maximum `400`)                                          |
 | `ImageWidth` EXIF field                 | Must be present                                                                       |
 | `ImageWidth` EXIF field                 | Must be unsigned short/long field                                                     |
 | `ImageHeight` EXIF field                | Must be present                                                                       |
