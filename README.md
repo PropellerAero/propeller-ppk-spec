@@ -22,7 +22,7 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 | ------------------------------ | ---------------------------------------------------- |
 | Flight directory name / prefix | Must be unique for an uploaded collection of flights |
 | Flight directory name / prefix | Must be <255 characters long                         |
-| Flight directory               | Must contain at least 1 JPEG image                   |
+| Flight directory               | Must contain between 1 - 9999 JPEG images            |
 | Flight directory               | Must contain 1 GNSS.obs RINEX file                   |
 | Flight directory               | Must contain 1 metadata.csv metadata file            |
 
@@ -237,7 +237,7 @@ The body section must contain one entry for every image captured.
 | --------------------------------- | ------------------------------------------------------------------------ | ------- | --------------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
 | `Image`                           | File name for corresponding image                                        |         | String matching file name                     | `Flight01_0001.JPG` | Mandatory                                                                                          |
 | `Timestamp (s)`                   | Precise image timestamp measured since start of GPS week                 | Seconds | Fixed precision decimal with 6 decimal places | `105277.650307`     | Mandatory                                                                                          |
-| `GPS week number`                 | GPS week number for precise timestamp                                    |         | Positive integer                       | `2192`              | Mandatory                                                                                          |
+| `GPS week number`                 | GPS week number for precise timestamp                                    |         | Positive integer                              | `2192`              | Mandatory                                                                                          |
 | `Antenna offset north (m)`        | North component of offset from image focal plane to antenna phase center | Meters  | Fixed precision decimal with 3 decimal places | `0.025`             | Mandatory                                                                                          |
 | `Antenna offset east (m)`         | East component of offset from image focal plane to antenna phase center  | Meters  | Fixed precision decimal with 3 decimal places | `-0.030`            | Mandatory                                                                                          |
 | `Antenna offset up (m)`           | Up component of offset from image focal plane to antenna phase center    | Meters  | Fixed precision decimal with 3 decimal places | `0.190`             | Mandatory                                                                                          |
