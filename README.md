@@ -127,9 +127,9 @@ GNSS observation data for each flight must be stored in RINEX version 3.04 forma
   - Galileo E1
   - Galileo E5
 
-Other signals can be included and may be used in future and will be ignored otherwise.
+Other signals can be included and may be used in future but will be ignored otherwise.
 
-To ensure accurate GNSS solutions, every epoch must contain at least 16 GPS, GLONASS and Galileo satellites with dual-band measurements both with a signal-to-noise ratio (SNR) of > 35. An initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements is acceptable.
+To ensure accurate GNSS solutions every epoch must contain at least 16 GPS, GLONASS and Galileo satellites. With dual-band measurements with a signal-to-noise ratio (SNR) of > 35. It is acceptable to have an initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements.
 
 ### RINEX headers
 
@@ -237,7 +237,7 @@ The body section must contain one entry for every image captured.
 | --------------------------------- | ------------------------------------------------------------------------ | ------- | --------------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
 | `Image`                           | File name for corresponding image                                        |         | String matching file name                     | `Flight01_0001.JPG` | Mandatory                                                                                          |
 | `Timestamp (s)`                   | Precise image timestamp measured since start of GPS week                 | Seconds | Fixed precision decimal with 6 decimal places | `105277.650307`     | Mandatory                                                                                          |
-| `GPS week number`                 | GPS week number for precise timestamp                                    |         | Positive integer decimal                      | `2192`              | Mandatory                                                                                          |
+| `GPS week number`                 | GPS week number for precise timestamp                                    |         | Positive integer                       | `2192`              | Mandatory                                                                                          |
 | `Antenna offset north (m)`        | North component of offset from image focal plane to antenna phase center | Meters  | Fixed precision decimal with 3 decimal places | `0.025`             | Mandatory                                                                                          |
 | `Antenna offset east (m)`         | East component of offset from image focal plane to antenna phase center  | Meters  | Fixed precision decimal with 3 decimal places | `-0.030`            | Mandatory                                                                                          |
 | `Antenna offset up (m)`           | Up component of offset from image focal plane to antenna phase center    | Meters  | Fixed precision decimal with 3 decimal places | `0.190`             | Mandatory                                                                                          |
@@ -258,7 +258,7 @@ The image focal plane to GNSS antenna phase center offset components are measure
 
 The GNSS antenna to image focal plane offset north / east / up components should be calculated using a lever-arm given the aircraft's geometry and roll / pitch / yaw values for each image.
 
-If this is not possible and roll / pitch values are typically small (< 5 degrees) and the image sensor is mounted directly below the GNSS antenna a constant vertical offset may be supplied in the `Antenna offset up (m)` field.
+If this is not possible and roll / pitch values are typically small (< 5 degrees) and the image sensor is mounted directly below the GNSS antenna a constant vertical offset may be supplied for the `Antenna offset` fields.
 
 ### Metadata file requirements
 
