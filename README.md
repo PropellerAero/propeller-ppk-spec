@@ -118,7 +118,7 @@ GNSS observation data for each flight must be stored in RINEX version 3.04 forma
 
 - Cover the period from aircraft take off to landing
 - Have no gaps between epochs of > 1 second
-- Have a constant sample rate of 1 - 20 Hz
+- Have a constant sample rate of 5 - 20 Hz
 - Include signals for:
   - GPS L1
   - GPS L2
@@ -169,7 +169,7 @@ Propeller PPK will validate that each RINEX file uploaded meets the following re
 | `GLONASS COD/PHS/BIS` header  | Must be present and valid RINEX format                                      |
 | First epoch timestamp         | Must be before timestamp of first image in metadata.json file               |
 | Last epoch timestamp          | Must be after timestamp of last image in metadata.json file                 |
-| Sample rate                   | Must be 1 - 20 Hz, (0.05s - 1s interval)                                    |
+| Sample rate                   | Must be 5 - 20 Hz, (0.2s - 1s interval)                                     |
 | All epochs                    | Must be no gaps > 1 second between samples                                  |
 | Each epoch                    | Must contain at least 16 satellites with SNR > 35 dBHz on both bands        |
 | Each epoch                    | Must contain doppler frequency measurement for each satellite               |
