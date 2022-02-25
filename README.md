@@ -111,8 +111,6 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 | `GPSAltitudeRef` EXIF field             | Must be the 8-bit unsigned integer `0` for above sea level or `1` for below sea level |
 | `LensModel` EXIF field                  | Must be an ASCII string identifying the lens model if present                         |
 | `ShutterSpeedValue` EXIF field          | Must be EXIF rational64s format if present                                            |
-| `FlightXSpeed` EXIF field               | Must be XMP `real` floating point format if present                                   |
-| `FlightYSpeed` EXIF field               | Must be XMP `real` floating point format if present                                   |
 
 ## GNSS observations
 
