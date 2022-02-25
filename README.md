@@ -84,7 +84,7 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 | Field                                   | Description                                                                           |
 | --------------------------------------- | ------------------------------------------------------------------------------------- |
 | File name                               | Must be <255 characters long                                                          |
-| File name                               | Must match `:flightPrefix:\_:sequentialNumber:.JPG` format                            |
+| File name                               | Must match `:flightPrefix:_:sequentialNumber:.JPG` format                             |
 | File name                               | Must match an entry in the metadata.csv file                                          |
 | `DateTimeOriginal` EXIF field           | Must be present                                                                       |
 | `DateTimeOriginal` EXIF field           | Must be an ASCII date string of format `YYYY:MM:DD HH:MM:SS`                          |
@@ -141,7 +141,7 @@ Propeller PPK will validate that each RINEX file uploaded meets the following re
 | Field                         | Description                                                                 |
 | ----------------------------- | --------------------------------------------------------------------------- |
 | File name                     | Must be <255 characters long                                                |
-| File name                     | Must match `:flightPrefix:\_GNSS.obs` format                                |
+| File name                     | Must match `:flightPrefix:_GNSS.obs` format                                 |
 | `RINEX VERSION / TYPE` header | Must be RINEX version 3.04                                                  |
 | `APPROX POSITION XYZ` header  | Must be present and contain the approximate WGS84 coordinates of the flight |
 | `SYS / # / OBS TYPES` header  | Must be present and valid RINEX format                                      |
@@ -255,7 +255,7 @@ Propeller PPK will validate that each RINEX file uploaded meets the following re
 | Field                                                     | Description                                                                                                                                                                                                                                                          |
 | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | File name                                                 | Must be <255 characters long                                                                                                                                                                                                                                         |
-| File name                                                 | Must match `:flightPrefix:\_metadata.csv` format                                                                                                                                                                                                                     |
+| File name                                                 | Must match `:flightPrefix:_metadata.csv` format                                                                                                                                                                                                                      |
 | `Manufacturer` header field                               | Must be present                                                                                                                                                                                                                                                      |
 | `Manufacturer` header field                               | Must be <255 character long Unicode string                                                                                                                                                                                                                           |
 | `Model` header field                                      | Must be present                                                                                                                                                                                                                                                      |
