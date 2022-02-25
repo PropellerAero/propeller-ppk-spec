@@ -250,11 +250,11 @@ The body section must contain one entry for every image captured.
 
 ### Antenna offset conventions
 
-The image focal plane to GNSS antenna offset components are measured relative to the global ENU coordinate frame where:
+The image focal plane to GNSS antenna phase center offset components are measured relative to the global ENU coordinate frame where:
 
-- `Antenna offset north (m)` is positive when the GNSS antenna is more north than the image focal plane
-- `Antenna offset east (m)` is positive when the GNSS antenna is more east than the image focal plane
-- `Antenna offset up (m)` is positive when the GNSS antenna is above the image focal plane
+- `Antenna offset north (m)` is positive when the GNSS antenna phase center is more north than the image focal plane
+- `Antenna offset east (m)` is positive when the GNSS antenna phase center is more east than the image focal plane
+- `Antenna offset up (m)` is positive when the GNSS antenna phase center is above the image focal plane
 
 The GNSS antenna to image focal plane offset north / east / up components should be calculated using a lever-arm given the aircraft's geometry and roll / pitch / yaw values for each image.
 
