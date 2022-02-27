@@ -221,6 +221,13 @@ The file is comprised of:
 | `Firmware version`      | Identifies the aircraft firmware version, used by Propeller support to identify firmware specific issues | Mandatory |
 | `Propeller PPK version` | Identifies the version of the Propeller PPK format generated, currently always set to `1.0`              | Mandatory |
 
+Headers must be encoded in Microsoft Excel style with:
+
+- Fields containing `,` wrapped in `"` quotes
+- `"` characters in fields encoded as `""`
+
+For example the field `a string containing , and "` should be encoded as `"a string containing , and """`
+
 ### Body header row
 
 The body section must start with the static header row
