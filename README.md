@@ -131,7 +131,7 @@ Other signals can be included and may be used in future but will be ignored othe
 
 To ensure accurate GNSS solutions every epoch must contain at least 16 GPS, GLONASS and Galileo satellites. With dual-band measurements with a signal-to-noise ratio (SNR) of > 35. It is acceptable to have an initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements.
 
-RINEX files must be at least 2 minutes in duration when processed using an AeroPoint as the GNSS reference and 10 minutes when processed using the Propeller Corrections Network.
+RINEX files must contain at least 2 minutes of observations after initialisation when processed using an AeroPoint 2 as the GNSS reference or 10 minutes when processed using the Propeller Corrections Network or an AeroPoint 1.
 
 ### RINEX headers
 
