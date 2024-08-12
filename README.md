@@ -6,6 +6,10 @@ An example data set is available [here](https://drive.google.com/drive/folders/1
 
 ## Changelog
 
+### v1.0.1 2024-08-12
+
+- Clarify roll / pitch / yaw coordinate frame
+
 ### v1.0.0 2022-02-28
 
 - Initial version of specification
@@ -256,9 +260,9 @@ The body section must contain one entry for every image captured.
 | `Antenna offset north (m)`        | North component of offset from image focal plane to antenna phase center | Meters  | Fixed precision decimal with 3 decimal places | `0.025`             | Mandatory                                                                                          |
 | `Antenna offset east (m)`         | East component of offset from image focal plane to antenna phase center  | Meters  | Fixed precision decimal with 3 decimal places | `-0.030`            | Mandatory                                                                                          |
 | `Antenna offset up (m)`           | Up component of offset from image focal plane to antenna phase center    | Meters  | Fixed precision decimal with 3 decimal places | `0.190`             | Mandatory                                                                                          |
-| `Roll (degrees)`                  | Aircraft RPY convention roll component                                   | Degrees | Fixed precision decimal with 2 decimal places | `0.13`              | _Optional_ - Not used in GNSS processing, but may be used in photogrammetry processing if present. |
-| `Pitch (degrees)`                 | Aircraft RPY convention pitch component                                  | Degrees | Fixed precision decimal with 2 decimal places | `-90.00`            | _Optional_ - Not used in GNSS processing, but may be used in photogrammetry processing if present. |
-| `Yaw (degrees)`                   | Aircraft RPY convention yaw component                                    | Degrees | Fixed precision decimal with 2 decimal places | `94.20`             | _Optional_ - Not used in GNSS processing, but may be used in photogrammetry processing if present. |
+| `Roll (degrees)`                  | Camera / gimbal roll component (RPY convention)                          | Degrees | Fixed precision decimal with 2 decimal places | `0.13`              | _Optional_ - Not used in GNSS processing, but may be used in photogrammetry processing if present. |
+| `Pitch (degrees)`                 | Camera / gimbal pitch component (RPY convention)                         | Degrees | Fixed precision decimal with 2 decimal places | `-90.00`            | _Optional_ - Not used in GNSS processing, but may be used in photogrammetry processing if present. |
+| `Yaw (degrees)`                   | Camera / gimbal yaw component (RPY convention)                           | Degrees | Fixed precision decimal with 2 decimal places | `94.20`             | _Optional_ - Not used in GNSS processing, but may be used in photogrammetry processing if present. |
 | `Approximate longitude (degrees)` | Longitude component of coarse GNSS coordinates for image                 | Degrees | Fixed precision decimal with 8 decimal places | `146.64916670`      | Mandatory unless `GPSLongitude` / `GPSLongitudeRef` Image EXIF headers provided                    |
 | `Approximate latitude (degrees)`  | Latitude component of coarse GNSS coordinates for image                  | Degrees | Fixed precision decimal with 8 decimal places | `-35.85037326`      | Mandatory unless `GPSLatitude` / `GPSLatitudeRef` Image EXIF headers provided                      |
 | `Approximate altitude (m)`        | Altitude component of coarse GNSS coordinates for image                  | Meters  | Fixed precision decimal with 3 decimal places | `280.124`           | Mandatory unless `GPSAltitude` / `GPSAltitudeRef` Image EXIF headers provided                      |
