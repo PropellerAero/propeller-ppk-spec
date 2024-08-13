@@ -1,6 +1,7 @@
 # Automatically merge dependabot PRs that upgrade to patch or minor versions. Adapted from:
 # https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions#enable-auto-merge-on-a-pull-request
-name: dependabot-auto-merge
+name: Dependabot Auto-merge
+
 on: pull_request
 
 permissions:
@@ -26,7 +27,7 @@ jobs:
 
       - name: Auto-merge Dependabot PR
         if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor'}}
-        run: gh pr merge --auto --merge "$PR_URL"
+        run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
