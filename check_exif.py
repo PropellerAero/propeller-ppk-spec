@@ -30,6 +30,7 @@ REQUIRED_TAGS = [
     'ImageHeight',
     'ImageWidth',
     'ISO',
+    'SerialNumber',
     # 'LensModel',
     'Model',
     'ShutterSpeedValue',
