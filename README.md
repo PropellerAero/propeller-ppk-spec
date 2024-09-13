@@ -6,9 +6,9 @@ An example data set is available [here](https://drive.google.com/drive/folders/1
 
 ## Changelog
 
-### v1.0.2 2024-09-12
+### v1.1.0 2024-09-12
 
-- Add `SerialNumber` exif tag
+- Add `CameraSerialNumber` EXIF tag
 - Add Optional `Camera Serial Number` Header field in metadata file
 
 ### v1.0.1 2024-08-12
@@ -76,22 +76,22 @@ Images must be named with the flight prefix and a unique (within the flight) 4 d
 
 Propeller PPK uses the following EXIF headers. Other headers are permitted and will be ignored.
 
-| Field               | Purpose                                                                    |                                                                          |
-| ------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `DateTimeOriginal`  | Establishing data set capture time and detecting gaps between images       | Mandatory                                                                |
-| `ISO`               | Validating images quality is high enough to produce an accurate survey     | Mandatory                                                                |
-| `ImageWidth`        | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
-| `ImageHeight`       | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
-| `Model`             | Optimising photogrammetry camera parameters to produce an accurate survey  | Mandatory                                                                |
-| `GPSLongitude`      | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSLongitudeRef`   | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSLatitude`       | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSLatitudeRef`    | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSAltitude`       | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSAltitudeRef`    | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `SerialNumber`      | Identifies the specific Camera that was used to capture images             | Mandatory unless Camera Serial Number is supplied in metadata.json file  |
-| `LensModel`         | Optimising photogrammetry parameters to produce an accurate survey         | _Optional_                                                               |
-| `ShutterSpeedValue` | Detecting motion blur in combination with speed derived from position      | _Optional_                                                               |
+| Field                | Purpose                                                                    |                                                                          |
+| -------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `DateTimeOriginal`   | Establishing data set capture time and detecting gaps between images       | Mandatory                                                                |
+| `ISO`                | Validating images quality is high enough to produce an accurate survey     | Mandatory                                                                |
+| `ImageWidth`         | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
+| `ImageHeight`        | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
+| `Model`              | Optimising photogrammetry camera parameters to produce an accurate survey  | Mandatory                                                                |
+| `GPSLongitude`       | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSLongitudeRef`    | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSLatitude`        | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSLatitudeRef`     | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSAltitude`        | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSAltitudeRef`     | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `CameraSerialNumber` | Identifies the specific Camera that was used to capture images             | Mandatory unless Camera Serial Number is supplied in metadata.json file  |
+| `LensModel`          | Optimising photogrammetry parameters to produce an accurate survey         | _Optional_                                                               |
+| `ShutterSpeedValue`  | Detecting motion blur in combination with speed derived from position      | _Optional_                                                               |
 
 ### Image requirements
 
@@ -125,7 +125,7 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 | `GPSAltitude` EXIF field                | Must be EXIF rational64u format                                                       |
 | `GPSAltitudeRef` EXIF field             | Must be present unless approximate position provided in the metadata.json file        |
 | `GPSAltitudeRef` EXIF field             | Must be the 8-bit unsigned integer `0` for above sea level or `1` for below sea level |
-| `SerialNumber` EXIF field               | Must be an ASCII string identifying the Camera Serial Number used                     |
+| `CameraSerialNumber` EXIF field         | Must be an ASCII string identifying the Camera Serial Number used                     |
 | `LensModel` EXIF field                  | Must be an ASCII string identifying the lens model if present                         |
 | `ShutterSpeedValue` EXIF field          | Must be EXIF rational64s format if present                                            |
 
