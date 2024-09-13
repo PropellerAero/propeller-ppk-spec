@@ -1,8 +1,8 @@
-# Works with Propeller PPK v1.0.0
+# Works with Propeller PPK v1.1.0
 
 _Works with Propeller PPK_ is a vendor-agnostic format that aircraft vendors can implement for out of the box compatibility with Propeller PPK.
 
-An example data set is available [here](https://drive.google.com/drive/folders/1oYa4CrTnOa-PHhblCbttts_LLamHgDf-?usp=sharing).
+An example data set is available [here (V1.1)](https://drive.google.com/drive/folders/1sbL8As_EeH2XFR5icsDBMWLvIfAy6U3m?usp=drive_link)
 
 ## Changelog
 
