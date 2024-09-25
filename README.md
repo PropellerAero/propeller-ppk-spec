@@ -1,10 +1,15 @@
-# Works with Propeller PPK v1.0.0
+# Works with Propeller PPK v1.1.0
 
 _Works with Propeller PPK_ is a vendor-agnostic format that aircraft vendors can implement for out of the box compatibility with Propeller PPK.
 
-An example data set is available [here](https://drive.google.com/drive/folders/1oYa4CrTnOa-PHhblCbttts_LLamHgDf-?usp=sharing).
+An example data set is available [here (V1.1)](https://drive.google.com/drive/folders/1sbL8As_EeH2XFR5icsDBMWLvIfAy6U3m?usp=drive_link)
 
 ## Changelog
+
+### v1.1.0 2024-09-12
+
+- Add `CameraSerialNumber` EXIF tag
+- Add Optional `Camera Serial Number` Header field in metadata file
 
 ### v1.0.1 2024-08-12
 
@@ -71,21 +76,22 @@ Images must be named with the flight prefix and a unique (within the flight) 4 d
 
 Propeller PPK uses the following EXIF headers. Other headers are permitted and will be ignored.
 
-| Field               | Purpose                                                                    |                                                                          |
-| ------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `DateTimeOriginal`  | Establishing data set capture time and detecting gaps between images       | Mandatory                                                                |
-| `ISO`               | Validating images quality is high enough to produce an accurate survey     | Mandatory                                                                |
-| `ImageWidth`        | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
-| `ImageHeight`       | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
-| `Model`             | Optimising photogrammetry camera parameters to produce an accurate survey  | Mandatory                                                                |
-| `GPSLongitude`      | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSLongitudeRef`   | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSLatitude`       | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSLatitudeRef`    | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSAltitude`       | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `GPSAltitudeRef`    | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
-| `LensModel`         | Optimising photogrammetry parameters to produce an accurate survey         | _Optional_                                                               |
-| `ShutterSpeedValue` | Detecting motion blur in combination with speed derived from position      | _Optional_                                                               |
+| Field                | Purpose                                                                    |                                                                          |
+| -------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `DateTimeOriginal`   | Establishing data set capture time and detecting gaps between images       | Mandatory                                                                |
+| `ISO`                | Validating images quality is high enough to produce an accurate survey     | Mandatory                                                                |
+| `ImageWidth`         | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
+| `ImageHeight`        | Validating images are high enough resolution to produce an accurate survey | Mandatory                                                                |
+| `Model`              | Optimising photogrammetry camera parameters to produce an accurate survey  | Mandatory                                                                |
+| `GPSLongitude`       | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSLongitudeRef`    | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSLatitude`        | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSLatitudeRef`     | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSAltitude`        | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `GPSAltitudeRef`     | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata.json file |
+| `CameraSerialNumber` | Identifies the specific Camera that was used to capture images             | Mandatory unless Camera Serial Number is supplied in metadata.json file  |
+| `LensModel`          | Optimising photogrammetry parameters to produce an accurate survey         | _Optional_                                                               |
+| `ShutterSpeedValue`  | Detecting motion blur in combination with speed derived from position      | _Optional_                                                               |
 
 ### Image requirements
 
@@ -119,6 +125,7 @@ Propeller PPK will validate that each flight directory uploaded meets the follow
 | `GPSAltitude` EXIF field                | Must be EXIF rational64u format                                                       |
 | `GPSAltitudeRef` EXIF field             | Must be present unless approximate position provided in the metadata.json file        |
 | `GPSAltitudeRef` EXIF field             | Must be the 8-bit unsigned integer `0` for above sea level or `1` for below sea level |
+| `CameraSerialNumber` EXIF field         | Must be an ASCII string identifying the Camera Serial Number used                     |
 | `LensModel` EXIF field                  | Must be an ASCII string identifying the lens model if present                         |
 | `ShutterSpeedValue` EXIF field          | Must be EXIF rational64s format if present                                            |
 
@@ -209,6 +216,7 @@ Model,DemoUAV
 Serial number,AJ34NF12
 Firmware version,1.75.24a_rev2
 Propeller PPK version,1.0
+Camera Serial Number,3742BE02
 Image,Timestamp (s),GPS week number,Antenna offset north (m),Antenna offset east (m),Antenna offset up (m),Roll (degrees),Pitch (degrees),Yaw (degrees),Approximate Longitude (degrees),Approximate Latitude (degrees),Approximate altitude (m)
 Flight01_0001.JPG,105277.650307,2192,0.025,-0.030,0.190,0.00,-90.00,94.20,146.64916670,-35.85037326,280.124
 Flight01_0002.JPG,105281.932945,2192,0.011,-0.018,0.193,0.00,-90.00,98.70,146.64947564,-35.85041480,280.044
@@ -223,13 +231,14 @@ The file is comprised of:
 
 ### Header fields
 
-| Header                  | Purpose                                                                                                  |           |
-| ----------------------- | -------------------------------------------------------------------------------------------------------- | --------- |
-| `Manufacturer`          | Unique string that identifies your organisation (e.g. `Propeller`)                                       | Mandatory |
-| `Model`                 | Unique string that identifies the model of aircraft (e.g. `DroneOne`)                                    | Mandatory |
-| `Serial number`         | Identifies the specific aircraft (e.g. `AJ34NF12`)                                                       | Mandatory |
-| `Firmware version`      | Identifies the aircraft firmware version, used by Propeller support to identify firmware specific issues | Mandatory |
-| `Propeller PPK version` | Identifies the version of the Propeller PPK format generated, currently always set to `1.0`              | Mandatory |
+| Header                  | Purpose                                                                                                  |                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `Manufacturer`          | Unique string that identifies your organisation (e.g. `Propeller`)                                       | Mandatory                                                                   |
+| `Model`                 | Unique string that identifies the model of aircraft (e.g. `DroneOne`)                                    | Mandatory                                                                   |
+| `Serial number`         | Identifies the specific aircraft (e.g. `AJ34NF12`)                                                       | Mandatory                                                                   |
+| `Firmware version`      | Identifies the aircraft firmware version, used by Propeller support to identify firmware specific issues | Mandatory                                                                   |
+| `Propeller PPK version` | Identifies the version of the Propeller PPK format generated, currently always set to `1.0`              | Mandatory                                                                   |
+| `Camera Serial Number`  | Identifies the specific Camera that was used to capture the images                                       | Mandatory unless `SerialNumber` is supplied in the image exif header fields |
 
 Headers must be encoded in Microsoft Excel style with:
 
