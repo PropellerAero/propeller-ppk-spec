@@ -2,7 +2,7 @@
 
 _Works with Propeller PPK_ is a vendor-agnostic format that aircraft vendors can implement for out of the box compatibility with Propeller PPK.
 
-An example data set is available [here](https://drive.google.com/drive/folders/1oYa4CrTnOa-PHhblCbttts_LLamHgDf-?usp=sharing).
+An example data set is available [here](https://drive.google.com/drive/folders/1mt6Rz6s0JdLUky7FakyADmMQRH5UZH7d?usp=sharing).
 
 ## Changelog
 
@@ -13,10 +13,8 @@ An example data set is available [here](https://drive.google.com/drive/folders/1
         - RTCM3
         - SBF
         - UBX
-        - RINEX
     - Add Support for multiple metadata file types
         - MRK
-        - CSV
     - Add additional fields to requested Image Exif headers
         - CameraSerialNumber
         - SerialNumber
@@ -428,7 +426,7 @@ If this is not possible and roll / pitch values are typically small (< 5 degrees
 
 ### Metadata file requirements
 
-Propeller PPK will validate that each RINEX file uploaded meets the following requirements
+Propeller PPK will validate that each CSV file uploaded meets the following requirements
 
 | Field                                                     | Description                                                                                                                                                                                                                                                          |
 | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -570,15 +568,15 @@ Propeller also accepts numbers for GNSS antenna specifications of Phase Centre o
 
 ## FAQ
 
-Q: _What is the PPK spec? Why do we need to follow these requirements?_ 
+Q: _What is the Propeller PPK specification? Why do we need to follow these requirements?_ 
 
-A: The PPK spec is Propeller's standard for accepting and processing PPK data. This standard is based on common formats in the industry, and provides developers with a specific set of requirements for seamless integration with our workflow. If this spec is followed, your data will flow through our processing pipeline. 
+A: The Propeller PPK specification is Propeller's standard for accepting and processing PPK data. This standard is based on common formats in the industry, and provides developers with a specific set of requirements for seamless integration with our workflow. If this spec is followed, your data will flow through our processing pipeline. 
 
 
 
 Q: _We are unable to meet some of these requirements. Are we blocked from Propeller PPK?_  
 
-A: No, not necessarily. While the PPK Spec is a source of truth for seamless integrations, we can be flexible on some of the requirements. Please reach out to drones@propelleraero.com.au with any specific requests.
+A: No, not necessarily. While the Propeller PPK specification is a source of truth for seamless integrations, we can be flexible on some of the requirements. Please reach out to drones@propelleraero.com.au with any specific requests.
 
 Q: _Why doesn't Propeller support L5 data?_
 
