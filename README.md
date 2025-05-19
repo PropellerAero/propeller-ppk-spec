@@ -103,8 +103,8 @@ Propeller PPK uses the following EXIF headers. Other headers are permitted and w
 | `GPSLatitudeRef`        | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata file                    |
 | `GPSAltitude`           | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata file                    |
 | `GPSAltitudeRef`        | Presenting images on a map during the upload process                       | Mandatory unless approximate position provided in the metadata file                    |
-| `CameraSerialNumber`    | Identifies the specific Camera that was used to capture images             | Mandatory unless approximate position provided in the metadata file                    |
-| `SerialNumber`          | Identifies the specific Drone that was used to capture images              | Mandatory unless approximate position provided in the metadata file                    |
+| `CameraSerialNumber`    | Identifies the specific camera that was used to capture images             | Mandatory                                                                              |
+| `SerialNumber`          | Identifies the specific drone that was used to capture images              | Mandatory                                                                              |
 | `LensModel`             | Optimising photogrammetry parameters to produce an accurate survey         | _Optional_                                                                             |
 | `ShutterSpeedValue`     | Detecting motion blur in combination with speed derived from position      | _Optional_                                                                             |
 | `ExposureTime`          | Detecting motion blur in combination with speed derived from position      | _Optional_                                                                             |
@@ -190,9 +190,9 @@ The GNSS observations must:
 
 Other signals can be included and may be used in future but will be ignored otherwise.
 
-To ensure accurate GNSS solutions every epoch must contain at least 16 GPS, GLONASS and Galileo satellites. With dual-band measurements with a signal-to-noise ratio (SNR) of > 35 dBHz. It is acceptable to have an initialization window of up to 60 seconds at the beginning of the file that does not meet these requirements.
+To ensure accurate GNSS solutions every epoch must contain at least 16 GPS, GLONASS and Galileo satellites. With dual-band measurements with a signal-to-noise ratio (SNR) of > 35 dBHz. It is acceptable to have an initialisation window of up to 60 seconds at the beginning of the file that does not meet these requirements.
 
-GNSS files must contain at least 2 minutes of observations after initialization when processed using an AeroPoint 2 as the GNSS reference or 10 minutes when processed using the Propeller Corrections Network or an AeroPoint 1.
+GNSS files must contain at least 2 minutes of observations after initialisation when processed using an AeroPoint 2 as the GNSS reference or 10 minutes when processed using the Propeller Corrections Network or an AeroPoint 1.
 
 ### GNSS File requirements
 Propeller PPK validates that each GNSS file meets the following requirements
@@ -372,7 +372,7 @@ The file is comprised of:
 | `Manufacturer`          | Unique string that identifies your organisation (e.g. `Propeller`)                                       | Mandatory |
 | `Model`                 | Unique string that identifies the model of aircraft (e.g. `DroneOne`)                                    | Mandatory |
 | `Serial number`         | Identifies the specific aircraft (e.g. `AJ34NF12`)                                                       | Mandatory |
-| `Camera Serial Number`  | Identifies the specific Camera that was used to capture the images                                       | Mandatory |
+| `Camera Serial Number`  | Identifies the specific camera that was used to capture the images                                       | Mandatory |
 | `Firmware version`      | Identifies the aircraft firmware version, used by Propeller support to identify firmware specific issues | Mandatory |
 | `Propeller PPK version` | Identifies the version of the Propeller PPK format generated                                             | Mandatory |
 
@@ -586,13 +586,13 @@ A: Propeller AeroPoints collect L1/L2 data for PPK corrections in line with most
 
 Q: _Our drone can already collect RTK datasets. Can we upload without any additional engineering work?_
 
-A: Yes, Propeller can accept data from any drone for high-accuracy and standard accuracy without the further engineering work. If your images include high-accuracy geotags, we can process those tags. Propeller PPK support is limited to drones that have completed the integration process 
+A: Yes, Propeller can accept data from any drone for high-accuracy and standard accuracy without the further engineering work. If your images include high-accuracy geotags, we can process those tags. Propeller PPK support is limited to drones that have completed the integration process. 
 
 
 
 Q: _Why does Propeller prefer Raw GNSS data over computed GNSS formats such as RINEX_
 
-A:  Conversion to formats such as RINEX from raw GNSS data is a lossy conversion process. This means that precision in values and data may get loss during this process. By using computed formats such as RINEX Propeller PPK may not be able to produce as accurate results as using raw GNSS data format 
+A:  Conversion to formats such as RINEX from raw GNSS data is a lossy conversion process. This means that precision in values and data may get loss during this process. By using computed formats such as RINEX Propeller PPK may not be able to produce as accurate results as using raw GNSS data format.
 
 
 
