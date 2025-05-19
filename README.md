@@ -169,7 +169,7 @@ Propeller PPK strongly prefers raw GNSS formats - SBF, RTCM3 and UBX - [see the 
 
 ## GNSS observations
 
-GNSS observation data for each flight must be stored in a one of the following GNSS formats.
+GNSS observation data for each flight must be stored in one of the following GNSS formats.
 - [RINEX](#rinex)
 - [SBF](#sbf)
 - [UBX](#ubx)        
@@ -263,9 +263,9 @@ Propeller PPK will validate that each RINEX file uploaded meets the [GNSS file r
 Propeller PPK expects that each SBF (Septentrio Binary Format) file conforms to the SBF specification and therefore each SBF block is valid and not malformed.
 
 Propeller PPK uses the following SBF Message blocks. Additional SBF Messages are permitted but these will be ignored.
-    - MeasEpoch
-    - Navigation Page Blocks
-    - Decoded GPS, GLONASS and Galileo message blocks.
+- MeasEpoch
+- Navigation Page Blocks
+- Decoded GPS, GLONASS and Galileo message blocks.
 
 ### SBF requirements
 
@@ -273,7 +273,7 @@ Propeller PPK will validate that each SBF file uploaded meets the [GNSS file req
 
 | Field                         | Description                                                                       |
 | ----------------------------- | --------------------------------------------------------------------------------- |
-| File name                     | Must match :flightPrefix:.sbf format                                              |
+| File name                     | Must match `:flightPrefix:.sbf` format                                              |
 | File                          | Must conform to the SBF specification                                             |
 | File                          | Must contain MeasEpoch blocks                                                     |
 | File                          | Must contain Navigation Page Blocks and corresponding decoded message blocks      |
@@ -292,7 +292,7 @@ Propeller PPK will validate that each UBX file uploaded meets the [GNSS file req
 
 | Field                         | Description                                                                       |
 | ----------------------------- | --------------------------------------------------------------------------------- |
-| File name                     | Must match :flightPrefix:.ubx format                                              |
+| File name                     | Must match `:flightPrefix:.ubx` format                                              |
 | File                          | Must conform to the UBX specification                                             |
 | File                          | Must contain UBX-RXM-RAWX blocks                                                  |
 | File                          | Must contain UBX-RXM-SFRBX blocks                                                 |
@@ -317,7 +317,7 @@ Propeller PPK will validate that each RTCM3 file uploaded meets the [GNSS file r
 
 | Field                         | Description                                                                       |
 | ----------------------------- | --------------------------------------------------------------------------------- |
-| File name                     | Must match :flightPrefix:.rtcm3 format                                            |
+| File name                     | Must match `:flightPrefix:.rtcm3` format                                            |
 | File                          | Must conform to the RTCM3 specification                                           |
 | File                          | Must contain GPS MSM5/MSM6/MSM7 messages                                          |
 | File                          | Must contain GLONASS MSM5/MSM6/MSM7 messages                                      |
@@ -374,7 +374,7 @@ The file is comprised of:
 | `Serial number`         | Identifies the specific aircraft (e.g. `AJ34NF12`)                                                       | Mandatory |
 | `Camera Serial Number`  | Identifies the specific camera that was used to capture the images                                       | Mandatory |
 | `Firmware version`      | Identifies the aircraft firmware version, used by Propeller support to identify firmware specific issues | Mandatory |
-| `Propeller PPK version` | Identifies the version of the Propeller PPK format generated                                             | Mandatory |
+| `Propeller PPK version` | Identifies the version of the Propeller PPK format generated must be `1.0` or `2.0`                      | Mandatory |
 
 Headers must be encoded in Microsoft Excel style with:
 
@@ -382,6 +382,8 @@ Headers must be encoded in Microsoft Excel style with:
 - `"` characters in fields encoded as `""`
 
 For example the field `a string containing , and "` should be encoded as `"a string containing , and """`
+
+Propeller PPK version refers to the version of the Propeller PPK specification being conformed to, as such it should be `2.1` if conforming to `2.1.x` version of the Propeller PPK specification.
 
 ### Body header row
 
@@ -440,7 +442,7 @@ Propeller PPK will validate that each RINEX file uploaded meets the following re
 | `Serial number` header field                              | Must be <255 character long Unicode string                                                                                                                                                                                                                           |
 | `Firmware version` header field                           | Must be present                                                                                                                                                                                                                                                      |
 | `Firmware version` header field                           | Must be <255 character long Unicode string                                                                                                                                                                                                                           |
-| `Propeller PPK version` header field                      | Must be present                                                                                                                                                                                                                                                      |
+| `Propeller PPK version` header field                      | Must be present and be either `1.0` or `2.0`                                                                                                                                                                                                                         |
 | `Propeller PPK version` header field                      | Must be <255 character long Unicode string                                                                                                                                                                                                                           |
 | Body header row                                           | Must be present                                                                                                                                                                                                                                                      |
 | Body header row                                           | Must be the string `Image,Timestamp (s),GPS week number,Antenna offset north (m),Antenna offset east (m),Antenna offset up (m),Roll (degrees),Pitch (degrees),Yaw (degrees),Approximate Longitude (degrees),Approximate Latitude (degrees),Approximate altitude (m)` |
@@ -511,7 +513,7 @@ Propeller PPK will validate that each MRK file uploaded meets the following requ
 | Field                                                     | Description                                                                                            |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | File Name                                                 | Must be <255 characters long                                                                           |
-| File name                                                 | Must match :flightPrefix:_metadata.mrk format                                                          |
+| File name                                                 | Must match `:flightPrefix:_metadata.mrk` format                                                          |
 | MRK file                                                  | Conforms to the MRK specification                                                                      | 
 | MRK file                                                  | Contains no empty rows                                                                                 |
 | MRK file                                                  | Contains no duplicate entries                                                                          | 
@@ -559,7 +561,7 @@ Please see the [FAQ](#faq) for why Propeller needs this data.
 
 GPS Antenna Calibration Data should be provided in the format of ANTEX file which should conform to the following [specification](https://files.igs.org/pub/data/format/antex14.txt).
 
-This file needs to be provided to Propeller if this file is not already stored [here](https://www.ngs.noaa.gov/ANTCAL/LoadFile?file=ngs20.atx) and is not currently valid.
+This file needs to be provided to Propeller if this file is not already stored [here](https://www.ngs.noaa.gov/ANTCAL/LoadFile?file=ngs20.atx).
 
 ### Numbers for GNSS antenna specifications of Phase Centre offsets
 
@@ -586,16 +588,16 @@ A: Propeller AeroPoints collect L1/L2 data for PPK corrections in line with most
 
 Q: _Our drone can already collect RTK datasets. Can we upload without any additional engineering work?_
 
-A: Yes, Propeller can accept data from any drone for high-accuracy and standard accuracy without the further engineering work. If your images include high-accuracy geotags, we can process those tags. Propeller PPK support is limited to drones that have completed the integration process. 
+A: Yes, Propeller can accept data from any drone for high-accuracy and standard accuracy without further engineering work. If your images include high-accuracy geotags, we can process those tags. Propeller PPK support is limited to drones that have completed the integration process. 
 
 
 
-Q: _Why does Propeller prefer Raw GNSS data over computed GNSS formats such as RINEX_
+Q: _Why does Propeller prefer Raw GNSS data over computed GNSS formats such as RINEX?_
 
 A:  Conversion to formats such as RINEX from raw GNSS data is a lossy conversion process. This means that precision in values and data may get loss during this process. By using computed formats such as RINEX Propeller PPK may not be able to produce as accurate results as using raw GNSS data format.
 
 
 
-Q: _Why does Propeller need Antenna Type and Antenna Calibration data_
+Q: _Why does Propeller need Antenna Type and Antenna Calibration data?_
 
-A: Propeller needs the antenna type and antenna calibration data in order to provide a accurate PPK result as Propeller takes these into account when correcting geotags. Additionally this provides Propeller with the necessary information in order to troubleshoot poor PPK results.
+A: Propeller needs the antenna type and antenna calibration data in order to provide an accurate PPK result as Propeller takes these into account when correcting geotags. Additionally this provides Propeller with the necessary information in order to troubleshoot poor PPK results.
